@@ -11,11 +11,17 @@ let getCity = function() {
             console.log("response", response);
             response.json().then(function(data) {
                 console.log("data", data);
-                console.log("Title", data.results.items[0].title);
-                console.log("address", data.results.items[0].vicinity);
-                console.log("website", data.results.items[0].href);
-                console.log("icon", data.results.items[0].icon);
-                console.log("type", data.results.items[0].category.title);
+
+                //setting loop to give back the top 10 attractions
+                for(let i=0; i<data.results.items.length; i++){
+                    console.log("Title: ", data.results.items[i].title);
+                    console.log("address: ", data.results.items[i].vicinity);
+                    console.log("website: ", data.results.items[i].href);
+                    console.log("icon: ", data.results.items[i].icon);
+                    console.log("type: git ", data.results.items[i].category.title);
+        
+
+                }
             });
         } else {
             alert('Error: ' + response.statusText);
