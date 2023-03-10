@@ -11,8 +11,11 @@ let getCity = function() {
             console.log("response", response);
             response.json().then(function(data) {
                 console.log("data", data);
-                console.log("1st array", data.results.items[0].title)
-
+                console.log("Title", data.results.items[0].title);
+                console.log("address", data.results.items[0].vicinity);
+                console.log("website", data.results.items[0].href);
+                console.log("icon", data.results.items[0].icon);
+                console.log("type", data.results.items[0].category.title);
             });
         } else {
             alert('Error: ' + response.statusText);
