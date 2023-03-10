@@ -11,7 +11,7 @@ let getCity = function() {
             console.log("response", response);
             response.json().then(function(data) {
                 console.log("data", data);
-                // Displays current date
+                console.log("1st array", data.results.items[0].title)
 
             });
         } else {
