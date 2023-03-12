@@ -3,6 +3,9 @@ const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 const buttonsEl = document.querySelector(".btn-city");
 let selectValue = document.querySelector("#city");
 
+//restaruant query https://places.ls.hereapi.com/places/v1/discover/explore?at=52.5159%2C13.3777&cat=restaurant&apiKey=H6XyiCT0w1t9GgTjqhRXxDMrVj9h78ya3NuxlwM7XUs
+//accomodations query https://places.ls.hereapi.com/places/v1/discover/explore?at=52.5159%2C13.3777&cat=accommodation&apiKey=H6XyiCT0w1t9GgTjqhRXxDMrVj9h78ya3NuxlwM7XUs
+
 //setting up the cities and their lat/long
 cityLookup = {
     "Charleston": "32.7876,-79.9402",
