@@ -1,5 +1,4 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
-const geoAPIKey = "311efa0f80774863873d1f5db76afb00";
 const city = "leipzig"
 
 let getCity = function() {
