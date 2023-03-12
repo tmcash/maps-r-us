@@ -1,2 +1,20 @@
 DROP DATABASE IF EXISTS user_db;
 CREATE DATABASE user_db;
+
+
+
+
+USE user_db;
+
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(255),
+  password VARCHAR(255)
+);
+
+CREATE TABLE cities (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(10),
+state VARCHAR(10),
+fun_fact VARCHAR(10)
+);
