@@ -7,9 +7,9 @@ CREATE DATABASE user_db;
 USE user_db;
 
 CREATE TABLE users (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  username VARCHAR(255),
-  password VARCHAR(255)
+id INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(255),
+password VARCHAR(255)
 );
 
 CREATE TABLE cities (
