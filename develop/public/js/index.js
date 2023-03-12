@@ -3,8 +3,7 @@ const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 const buttonsEl = document.querySelector(".btn-city");
 let selectValue = document.querySelector("#city");
 
-//restaruant query https://places.ls.hereapi.com/places/v1/discover/explore?at=52.5159%2C13.3777&cat=restaurant&apiKey=H6XyiCT0w1t9GgTjqhRXxDMrVj9h78ya3NuxlwM7XUs
-//accomodations query https://places.ls.hereapi.com/places/v1/discover/explore?at=52.5159%2C13.3777&cat=accommodation&apiKey=H6XyiCT0w1t9GgTjqhRXxDMrVj9h78ya3NuxlwM7XUs
+
 
 //setting up the cities and their lat/long
 cityLookup = {
@@ -20,6 +19,7 @@ cityLookup = {
     "Honolulu": "21.3045,-157.8556"
 }
 
+//sets up the drop down menu on the html page for the cities
 let selectList = selectValue;
 
 for (let key in cityLookup) {
@@ -35,6 +35,8 @@ let buttonClickHandler = function(event) {
     let city = event.target.value;
 
     getCity(city);
+    getFood(city);
+    getHotel(city);
 }
 
 let getCity = function(city) {
@@ -43,17 +45,17 @@ let getCity = function(city) {
     fetch(queryURL)
     .then(function(response) {
         if(response.ok) {
-            console.log("response", response);
+            console.log("Activity response", response);
             response.json().then(function(data) {
-                console.log("data", data);
+                console.log("Activity data", data);
 
                 //setting loop to give back the top 10 attractions
-                for(let i=0; i<data.results.items.length; i++){
+                for(let i=0; i<10; i++){
                     console.log("Title: ", data.results.items[i].title);
                     console.log("address: ", data.results.items[i].vicinity);
                     console.log("website: ", data.results.items[i].href);
                     console.log("icon: ", data.results.items[i].icon);
-                    console.log("type: git ", data.results.items[i].category.title);
+                    console.log("type: ", data.results.items[i].category.title);
         
 
                 }
@@ -64,7 +66,60 @@ let getCity = function(city) {
     });
 };
 
-//getCity(selectValue.value);
+
+//Function to get restaurant locations in selected city
+let getFood = function(city) {
+    let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?at=" + city + "&cat=restaurant&apiKey=" + APIKey;
+
+    fetch(queryURL)
+    .then(function(response) {
+        if(response.ok) {
+            console.log("Food response", response);
+            response.json().then(function(data) {
+                console.log("Food data", data);
+
+                //setting loop to give back the top 10 places to eat
+                for(let i=0; i<10; i++){
+                    console.log("Restaurant Title: ", data.results.items[i].title);
+                    console.log("Restaurant address: ", data.results.items[i].vicinity);
+                    console.log("Restaurant type: ", data.results.items[i].category.title);
+                    console.log("Restaurant hours: ", data.results.items[i].openingHours.text);
+                    console.log("icon: ", data.results.items[i].icon);
+                }
+            });
+        } else {
+            alert('Error: ' + response.statusText);
+        }
+    });
+};
+
+//function to find the hotels in the selected city
+let getHotel = function(city) {
+    let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?at=" + city + "&cat=accommodation&apiKey=" + APIKey;
+
+    fetch(queryURL)
+    .then(function(response) {
+        if(response.ok) {
+            console.log("Hotel response", response);
+            response.json().then(function(data) {
+                console.log("Hotel data", data);
+
+                //setting loop to give back the top 10 places to eat
+                for(let i=0; i<10; i++){
+                    console.log("Hotel Title: ", data.results.items[i].title);
+                    console.log("Hotel address: ", data.results.items[i].vicinity);
+                    console.log("Hotel type: ", data.results.items[i].category.title);
+                    console.log("Hotel hours: ", data.results.items[i].openingHours.text);
+                    console.log("icon: ", data.results.items[i].icon);
+                }
+                
+            });
+        } else {
+            alert('Error: ' + response.statusText);
+        }
+    });
+};
+
 
 //event listeners
 selectValue.addEventListener("change", buttonClickHandler);
