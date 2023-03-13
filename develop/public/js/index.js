@@ -1,9 +1,13 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 
-const buttonsEl = document.querySelector(".btn-city");
+// const buttonsEl = document.querySelector(".btn-city");
 let selectValue = document.querySelector("#city");
 
-
+//code for date picker
+const startDateInput = document.getElementById("start-date-input");
+const endDateInput = document.getElementById("end-date-input");
+const startDate = startDateInput.value;
+const endDate = endDateInput.value;
 
 //setting up the cities and their lat/long
 cityLookup = {
@@ -56,8 +60,6 @@ let getCity = function(city) {
                     console.log("website: ", data.results.items[i].href);
                     console.log("icon: ", data.results.items[i].icon);
                     console.log("type: ", data.results.items[i].category.title);
-        
-
                 }
             });
         } else {
@@ -104,7 +106,7 @@ let getHotel = function(city) {
             response.json().then(function(data) {
                 console.log("Hotel data", data);
 
-                //setting loop to give back the top 10 places to eat
+                //setting loop to give back the top 10 accomodations
                 for(let i=0; i<10; i++){
                     console.log("Hotel Title: ", data.results.items[i].title);
                     console.log("Hotel address: ", data.results.items[i].vicinity);
@@ -112,7 +114,6 @@ let getHotel = function(city) {
                     console.log("Hotel hours: ", data.results.items[i].openingHours.text);
                     console.log("icon: ", data.results.items[i].icon);
                 }
-                
             });
         } else {
             alert('Error: ' + response.statusText);
