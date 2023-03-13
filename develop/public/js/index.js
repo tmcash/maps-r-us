@@ -134,6 +134,7 @@ let getHotel = function(city) {
                         <img class="hotel-icon" src="${data.results.items[i].icon}" alt="hotel-icon"></img>
                         <ul class = "hotel-misc-info">
                             <li class = "title">Hotel Name: ${data.results.items[i].title}</li>
+                            <li class = "type">Type: ${data.results.items[i].category.title}</li>
                             <li class = "address">Address: ${data.results.items[i].vicinity}</li>
                         </ul>
                     </div>
