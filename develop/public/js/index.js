@@ -1,4 +1,7 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
+const resultGridHotel = document.getElementById("result-grid-hotel");
+const resultGridFood = document.getElementById("result-grid-food");
+const resultGridActivity = document.getElementById("result-grid-activity");
 
 // const buttonsEl = document.querySelector(".btn-city");
 let selectValue = document.querySelector("#city");
@@ -56,18 +59,26 @@ let getCity = function(city) {
                 //setting loop to give back the top 10 attractions
                 for(let i=0; i<10; i++){
                     console.log("Title: ", data.results.items[i].title);
-                    console.log("address: ", data.results.items[i].vicinity);
-                    console.log("website: ", data.results.items[i].href);
-                    console.log("icon: ", data.results.items[i].icon);
-                    console.log("type: ", data.results.items[i].category.title);
-                }
-            });
-        } else {
-            alert('Error: ' + response.statusText);
+                
+				//adding details from API as text to HTML
+                let activityInfo = `
+                <div class = "activity-info">
+                    <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
+                    <ul class = "activity-misc-info">
+                        <li class = "title">Name: ${data.results.items[i].title}</li>
+                        <li class = "type">Type: ${data.results.items[i].category.title}</li>
+                        <li class = "address">Address: ${data.results.items[i].vicinity}</li>
+                    </ul>
+                </div>
+            `;
+            resultGridActivity.innerHTML += activityInfo;
         }
     });
+} else {
+    console.log('Error: ' + response.statusText);
+}
+});
 };
-
 
 //Function to get restaurant locations in selected city
 let getFood = function(city) {
@@ -82,17 +93,25 @@ let getFood = function(city) {
 
                 //setting loop to give back the top 10 places to eat
                 for(let i=0; i<10; i++){
-                    console.log("Restaurant Title: ", data.results.items[i].title);
-                    console.log("Restaurant address: ", data.results.items[i].vicinity);
-                    console.log("Restaurant type: ", data.results.items[i].category.title);
-                    console.log("Restaurant hours: ", data.results.items[i].openingHours.text);
-                    console.log("icon: ", data.results.items[i].icon);
-                }
-            });
-        } else {
-            alert('Error: ' + response.statusText);
+
+				//adding details from API as text to HTML
+                let foodInfo = `
+                <div class = "food-info">
+                    <img class="food-icon" src="${data.results.items[i].icon}" alt="food-icon"></img>
+                    <ul class = "food-misc-info">
+                        <li class = "title">Restaurant Name: ${data.results.items[i].title}</li>
+                        <li class = "address">Address: ${data.results.items[i].vicinity}</li>
+                        <li class = "hours">Hours: ${data.results.items[i].openingHours.text}</li>
+                    </ul>
+                </div>
+            `;
+            resultGridFood.innerHTML += foodInfo;
         }
     });
+} else {
+    console.log('Error: ' + response.statusText);
+}
+});
 };
 
 //function to find the hotels in the selected city
@@ -108,19 +127,25 @@ let getHotel = function(city) {
 
                 //setting loop to give back the top 10 accomodations
                 for(let i=0; i<10; i++){
-                    console.log("Hotel Title: ", data.results.items[i].title);
-                    console.log("Hotel address: ", data.results.items[i].vicinity);
-                    console.log("Hotel type: ", data.results.items[i].category.title);
-                    console.log("Hotel hours: ", data.results.items[i].openingHours.text);
-                    console.log("icon: ", data.results.items[i].icon);
-                }
-            });
-        } else {
-            alert('Error: ' + response.statusText);
-        }
-    });
-};
 
+				    //adding details from API as text to HTML
+                    let hotelInfo = `
+                    <div class = "hotel-info">
+                        <img class="hotel-icon" src="${data.results.items[i].icon}" alt="hotel-icon"></img>
+                        <ul class = "hotel-misc-info">
+                            <li class = "title">Hotel Name: ${data.results.items[i].title}</li>
+                            <li class = "address">Address: ${data.results.items[i].vicinity}</li>
+                        </ul>
+                    </div>
+                `;
+                resultGridHotel.innerHTML += hotelInfo;
+            }
+        });
+    } else {
+        console.log('Error: ' + response.statusText);
+    }
+    });
+    };
 
 //event listeners
 selectValue.addEventListener("change", buttonClickHandler);
