@@ -19,8 +19,43 @@
     <button class="btn" id="logout">logout</button>
     </nav>
     <body>
-    <button class="btn city" id="charleston">Charleston, SC</button>
+        <label for="start-date-input">Start Date:</label>
+        <input type="date" id="start-date-input" name="start-date">
+        
+        <label for="end-date-input">End Date:</label>
+        <input type="date" id="end-date-input" name="end-date">
 
+
+        <!-- drop down menu for city selection -->
+        <label for="cars">Choose a city:</label>
+
+            <select name="city" id="city">
+            </select>
+
+        <!-- div container for hotels -->
+            <div class="container">
+                <div class="result-container">
+                    <div class="result-grid" id="result-grid-hotel">
+                    <!-- hotel information here -->
+                    </div>
+                </div>
+            </div>
+            <!-- div container for restaurants -->
+            <div class="container">
+                <div class="result-container">
+                    <div class="result-grid" id="result-grid-food">
+                    <!-- restaurant information here -->
+                    </div>
+                </div>
+            </div>
+            <!-- div container for activities -->
+            <div class="container">
+                <div class="result-container">
+                    <div class="result-grid" id="result-grid-activity">
+                    <!-- activity information here -->
+                    </div>
+                </div>
+            </div>
 
     </body>
     {{/if}}
