@@ -2,9 +2,15 @@ const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 const resultGridHotel = document.getElementById("result-grid-hotel");
 const resultGridFood = document.getElementById("result-grid-food");
 const resultGridActivity = document.getElementById("result-grid-activity");
+const btnHotel = document.getElementById("btn-hotel");
+const btnFood = document.getElementById("btn-food");
+const btnActivity = document.getElementById("btn-activity");
+const buttonsEl = document.querySelector("search-section");
+
 
 // const buttonsEl = document.querySelector(".btn-city");
 let selectValue = document.querySelector("#city");
+let city = "";
 
 //code for date picker
 const startDateInput = document.getElementById("start-date-input");
@@ -37,21 +43,40 @@ for (let key in cityLookup) {
 }
 
 //assiging a lat/long to each city so it can be used in the api query
-let buttonClickHandler = function(event) {
+let buttonSelectHandler = function(event) {
 
-    let city = event.target.value;
+    city = event.target.value;
 
     // clear the result grids before populating with new data
     resultGridHotel.innerHTML = '';
     resultGridFood.innerHTML = '';
     resultGridActivity.innerHTML = '';
-    
-    getCity(city);
-    getFood(city);
-    getHotel(city);
+    // getCity(city);
+    // getFood(city);
+    // getHotel(city);
 }
 
-let getCity = function(city) {
+
+//adding new code here so if it blows up delete this part
+let buttonClickHandler = function (event) {
+    var clickedButton = event.target.getAttribute("id");
+    console.log(clickedButton);
+    console.log(city);
+    if (clickedButton === "btn-hotel") {
+        resultGridHotel.innerHTML = '';
+        getHotel(city);
+    } else if (clickedButton === "btn-food") {
+        resultGridFood.innerHTML = '';
+        getFood(city);
+    } else if (clickedButton === "btn-activity") {
+        resultGridActivity.innerHTML = '';
+        getActivity(city);
+    } 
+};
+
+
+
+let getActivity = function(city) {
     let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?&at=" + city + "&cat=sights-museums&apiKey=" + APIKey;
 
     fetch(queryURL)
@@ -154,4 +179,8 @@ let getHotel = function(city) {
     };
 
 //event listeners
-selectValue.addEventListener("change", buttonClickHandler);
+selectValue.addEventListener("change", buttonSelectHandler);
+// buttonsEl.addEventListener("click", buttonClickHandler);
+btnHotel.addEventListener("click", buttonClickHandler);
+btnFood.addEventListener("click", buttonClickHandler);
+btnActivity.addEventListener("click", buttonClickHandler);
