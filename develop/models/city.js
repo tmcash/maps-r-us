@@ -1,28 +1,33 @@
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+host: 'localhost',
+dialect: 'mysql'
+});
 
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-
-class City extends Model {}
-
-City.init(
-{
-    id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-    },
-    name: {
+const City = sequelize.define('City', {
+name: {
     type: DataTypes.STRING,
-    allowNull: false,
-    }
+    allowNull: false
 },
-{
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'city',
+activities: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+restaurants: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+hotels: {
+    type: DataTypes.STRING,
+    allowNull: false
 }
-);
+});
 
-module.exports = City;
+// Sync the model with the database
+City.sync({ force: true })
+.then(() => {
+    console.log('City table created');
+})
+.catch((error) => {
+    console.error('Error creating City table:', error);
+});
