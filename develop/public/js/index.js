@@ -1,7 +1,5 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
-const resultGridHotel = document.getElementById("result-grid-hotel");
-const resultGridFood = document.getElementById("result-grid-food");
-const resultGridActivity = document.getElementById("result-grid-activity");
+const resultGridAll = document.getElementById("result-grid-all");
 const btnHotel = document.getElementById("btn-hotel");
 const btnFood = document.getElementById("btn-food");
 const btnActivity = document.getElementById("btn-activity");
@@ -48,9 +46,9 @@ let buttonSelectHandler = function(event) {
     city = event.target.value;
 
     // clear the result grids before populating with new data
-    resultGridHotel.innerHTML = '';
-    resultGridFood.innerHTML = '';
-    resultGridActivity.innerHTML = '';
+    resultGridAll.innerHTML = '';
+    // resultGridFood.innerHTML = '';
+    // resultGridActivity.innerHTML = '';
     // getCity(city);
     // getFood(city);
     // getHotel(city);
@@ -63,13 +61,13 @@ let buttonClickHandler = function (event) {
     console.log(clickedButton);
     console.log(city);
     if (clickedButton === "btn-hotel") {
-        resultGridHotel.innerHTML = '';
+        resultGridAll.innerHTML = '';
         getHotel(city);
     } else if (clickedButton === "btn-food") {
-        resultGridFood.innerHTML = '';
+        resultGridAll.innerHTML = '';
         getFood(city);
     } else if (clickedButton === "btn-activity") {
-        resultGridActivity.innerHTML = '';
+        resultGridAll.innerHTML = '';
         getActivity(city);
     } 
 };
@@ -95,13 +93,13 @@ let getActivity = function(city) {
                 <div class = "activity-info">
                     <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
                     <ul class = "activity-misc-info">
-                        <li class = "title">Name: ${data.results.items[i].title}</li>
-                        <li class = "type">Type: ${data.results.items[i].category.title}</li>
-                        <li class = "address">Address: ${data.results.items[i].vicinity}</li>
+                        <li class = "title"><b>Name:</b> ${data.results.items[i].title}</li>
+                        <li class = "type"><b>Type:</b> ${data.results.items[i].category.title}</li>
+                        <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
                     </ul>
                 </div>
             `;
-            resultGridActivity.innerHTML += activityInfo;
+            resultGridAll.innerHTML += activityInfo;
         }
     });
 } else {
@@ -129,13 +127,13 @@ let getFood = function(city) {
                 <div class = "food-info">
                     <img class="food-icon" src="${data.results.items[i].icon}" alt="food-icon"></img>
                     <ul class = "food-misc-info">
-                        <li class = "title">Restaurant Name: ${data.results.items[i].title}</li>
-                        <li class = "address">Address: ${data.results.items[i].vicinity}</li>
-                        <li class = "hours">Hours: ${data.results.items[i].openingHours.text}</li>
+                        <li class = "title"><b>Restaurant Name:</b> ${data.results.items[i].title}</li>
+                        <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
+                        <li class = "hours"><b>Hours:</b> ${data.results.items[i].openingHours.text}</li>
                     </ul>
                 </div>
             `;
-            resultGridFood.innerHTML += foodInfo;
+            resultGridAll.innerHTML += foodInfo;
         }
     });
 } else {
@@ -163,13 +161,13 @@ let getHotel = function(city) {
                     <div class = "hotel-info">
                         <img class="hotel-icon" src="${data.results.items[i].icon}" alt="hotel-icon"></img>
                         <ul class = "hotel-misc-info">
-                            <li class = "title">Hotel Name: ${data.results.items[i].title}</li>
-                            <li class = "type">Type: ${data.results.items[i].category.title}</li>
-                            <li class = "address">Address: ${data.results.items[i].vicinity}</li>
+                            <li class = "title"><b>Hotel Name:</b> ${data.results.items[i].title}</li>
+                            <li class = "type"><b>Type:</b> ${data.results.items[i].category.title}</li>
+                            <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
                         </ul>
                     </div>
                 `;
-                resultGridHotel.innerHTML += hotelInfo;
+                resultGridAll.innerHTML += hotelInfo;
             }
         });
     } else {
