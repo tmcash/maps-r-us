@@ -41,6 +41,11 @@ let buttonClickHandler = function(event) {
 
     let city = event.target.value;
 
+    // clear the result grids before populating with new data
+    resultGridHotel.innerHTML = '';
+    resultGridFood.innerHTML = '';
+    resultGridActivity.innerHTML = '';
+    
     getCity(city);
     getFood(city);
     getHotel(city);
