@@ -5,59 +5,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Registry</title>
-<link rel="stylesheet" href="/css/jass.css">
+<link rel="stylesheet" href="./css/style.css">
+<!-- framework -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://kit.fontawesome.com/337be747ec.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<header class="display-flex justify-space-between align-center p-2">
-    <h1>
-    User Registry
-    </h1>
-    
+    <header id="wrapper" class="center-aligned">
+        <div class="journalimg" id="travel-journal" >
+            <img src="../../assets/images/Travel-Journal.jpg" alt="MapsRUs logo">
+        </div>
     {{#if logged_in}}
-    <nav>
-    <button class="btn" id="logout">logout</button>
-    </nav>
-    <body>
-        <label for="start-date-input">Start Date:</label>
-        <input type="date" id="start-date-input" name="start-date">
-        
-        <label for="end-date-input">End Date:</label>
-        <input type="date" id="end-date-input" name="end-date">
-
-
-        <!-- drop down menu for city selection -->
-        <label for="cars">Choose a city:</label>
-
-            <select name="city" id="city">
-            </select>
-
-        <!-- div container for hotels -->
-            <div class="container">
-                <div class="result-container">
-                    <div class="result-grid" id="result-grid-hotel">
-                    <!-- hotel information here -->
-                    </div>
-                </div>
+        <nav>
+            <h1>Welcome</h1>{{user}}
+            <button class="button" id="logout">logout</button>
+        </nav>
+    </header>
+    <div class="section-container-options">
+        <div class="options-container">
+            <h2>🔍 Search</h2>
+            <h2>📝 Itinerary</h2>
+            <h2>📧 Email</h2>
+        </div>
+    </div>
+    <main>
+        <aside class="side-container">
+            <div class="start-date-picker">
+                <label for="start-date-input">Start Date:</label>
+                <input type="date" id="start-date-input" name="start-date">
             </div>
-            <!-- div container for restaurants -->
-            <div class="container">
-                <div class="result-container">
-                    <div class="result-grid" id="result-grid-food">
-                    <!-- restaurant information here -->
-                    </div>
-                </div>
-            </div>
-            <!-- div container for activities -->
-            <div class="container">
-                <div class="result-container">
-                    <div class="result-grid" id="result-grid-activity">
-                    <!-- activity information here -->
-                    </div>
-                </div>
+            <div class="end-date-picker"> 
+                <label for="end-date-input">End Date:</label>
+                <input type="date" id="end-date-input" name="end-date">
             </div>
 
-    </body>
+            <!-- drop down menu for city selection -->
+                <div class="city-dropdown">
+                <label for="cities">Choose a city:</label>
+
+                <select name="city" id="city">
+                </select>
+            </div>
+        <!-- Div containers for button selections  -->
+            <div class="side">
+                <section id="search-section" class="mb-2">
+                <p class="text-xl">Make a Selection:</p>
+                <button class="btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg" id="btn-hotel">Hotel</button>
+                <button class="btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg" id="btn-food">Restaurants</button>
+                <button class="btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg" id="btn-activity">Activities</button>
+
+            </div>
+        </aside>
+        <!-- div container for results -->
+        <section class="container" id="results-container">
+            <div class="result-container">
+                <div class="result-grid" id="result-grid-all">
+                <!-- hotel/food/activity information here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
     {{/if}}
 </header>
 <main class="container container-fluid mt-5">
