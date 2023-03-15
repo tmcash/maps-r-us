@@ -217,14 +217,7 @@ footer {
   margin-top: 75px;
 }
 
-/* movie result */
-.movie-title {
-  font-size: 2rem;
-  color: var(--yellow-color);
-  padding-top: 20px;
-  padding-right: 20px;
-}
-
+/*  Styling the results */
 .result-container {
   padding: 3rem 0;
 }
