@@ -1,15 +1,10 @@
 const router = require('express').Router();
 const { Hotel } = require('../../models');
-const bodyParser = require('body-parser');
 
-
-const app = express();
-app.use(bodyParser.json());
-
-app.post('/hotels', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const { name, city, address } = req.body;
-        const hotel = await Hotel.create({ name, city, address });
+        const { name, city } = req.body;
+        const hotel = await Hotel.create({ name, city });
         res.status(201).json(hotel);
     } catch (error) {
         console.error('Error saving hotel:', error);

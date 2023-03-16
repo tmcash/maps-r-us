@@ -163,29 +163,27 @@ let getHotel = function(city) {
                 `;
 
                 // add an event listener to the hotel-info element
-                // let hotelElement = document.createElement('div');
-                //     hotelElement.innerHTML = hotelInfo;
-                //     hotelElement.addEventListener('click', function(event) {
-                //         event.preventDefault();
-                //         let hotelName = data.results.items[i].title;
-                //         let hotelAddress = data.results.items[i].vicinity;
+                let hotelElement = document.createElement('div');
+                    hotelElement.innerHTML = hotelInfo;
+                    hotelElement.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        let hotelName = data.results.items[i].title;
 
                     // send the data to the server using a POST request
-                    // fetch('/hotels', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json'
-                    //     },
-                    //         body: JSON.stringify({
-                    //             name: hotelName,
-                    //             address: hotelAddress,
-                    //         })
-                    //     }).then(response => {
-                    //         console.log('Hotel saved to server!');
-                    //     }).catch(error => {
-                    //         console.error('Error saving hotel:', error);
-                    //     });
-                    // });
+                    fetch('/hotels', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                            body: JSON.stringify({
+                                name: hotelName,
+                            })
+                        }).then(response => {
+                            console.log('Hotel saved to server!');
+                        }).catch(error => {
+                            console.error('Error saving hotel:', error);
+                        });
+                    });
 
                 resultGridAll.innerHTML += hotelInfo;
             }
