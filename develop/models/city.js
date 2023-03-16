@@ -5,22 +5,17 @@ class City extends Model {}
 
 City.init (
 {
+    id: {
+        type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true,
+        },
     name: {
         type: DataTypes.STRING,
         allowNull: false
-},
-    activities: {
-        type: DataTypes.STRING,
-        allowNull: false
-},
-    restaurants: {
-        type: DataTypes.STRING,
-        allowNull: false
-},
-    hotels: {
-        type: DataTypes.STRING,
-        allowNull: false
 }
+
 }, 
 {
     sequelize,
