@@ -3,8 +3,8 @@ const { Activity } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
-        const { name, city } = req.body;
-        const activity = await Activity.create({ name, city });
+        const { name, type, address } = req.body;
+        const activity = await Activity.create({ name, type, address });
         res.status(201).json(activity);
     } catch (error) {
         console.error('Error saving activity:', error);

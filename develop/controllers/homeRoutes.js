@@ -4,12 +4,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // const userData = await User.findAll({
-    // // attributes: { exclude: ['password'] },
-    // // order: [['name', 'ASC']],
-    // });
 
-    // const users = userData.map((project) => project.get({ plain: true }));
     const temp = true;
     if (temp) {
       res.render("search", {
@@ -25,12 +20,7 @@ router.get("/", async (req, res) => {
 
 router.get("/itinerary", async (req, res) => {
   try {
-    // const userData = await User.findAll({
-    // // attributes: { exclude: ['password'] },
-    // // order: [['name', 'ASC']],
-    // });
 
-    // const users = userData.map((project) => project.get({ plain: true }));
     const temp = true;
     if (temp) {
       res.render("itinerary", {
