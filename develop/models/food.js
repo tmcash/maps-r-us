@@ -18,6 +18,9 @@ Food.init(
     address: {
       type: DataTypes.STRING,
     },
+    hours: {
+      type: DataTypes.STRING,
+    },
     city_id: {
       type: DataTypes.INTEGER,
       references: {
