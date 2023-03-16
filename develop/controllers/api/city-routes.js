@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { City } = require('../../models');
 
 router.post('/', async (req, res) => {
+
 try {
     const newCity = await City.create({
     ...req.body,
@@ -26,6 +27,7 @@ try {
     if (!citytData) {
     res.status(404).json({ message: 'No city found with this id!' });
     return;
+
     }
 
     res.status(200).json(citytData);

@@ -5,13 +5,13 @@ const sequelize = require('../config/connection');
 class UserType extends Model {}
 
 UserType.init(
-  {
+{
     //define id columns
     id: {
-      type: DataTypes.INTEGER, 
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+        type: DataTypes.INTEGER, 
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
 
     user_id: {

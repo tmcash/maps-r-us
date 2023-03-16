@@ -93,6 +93,29 @@ let getActivity = function(city) {
                     </ul>
                 </div>
             `;
+            // add an event listener to the activity-info element
+            let activityElement = document.createElement('div');
+            activityElement.innerHTML = foodInfo;
+            activityElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                let activityName = data.results.items[i].title;
+
+            // send the data to the server using a POST request
+            fetch('/activity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify({
+                        name: activityName,
+                    })
+                }).then(response => {
+                    console.log('Activity saved to server!');
+                }).catch(error => {
+                    console.error('Error saving activity:', error);
+                });
+            });
+
             resultGridAll.innerHTML += activityInfo;
         }
     });
@@ -127,6 +150,28 @@ let getFood = function(city) {
                     </ul>
                 </div>
             `;
+            // add an event listener to the food-info element
+            let foodElement = document.createElement('div');
+            foodElement.innerHTML = foodInfo;
+            foodElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                let foodName = data.results.items[i].title;
+
+            // send the data to the server using a POST request
+            fetch('/food', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify({
+                        name: foodName,
+                    })
+                }).then(response => {
+                    console.log('Food saved to server!');
+                }).catch(error => {
+                    console.error('Error saving food:', error);
+                });
+            });
             resultGridAll.innerHTML += foodInfo;
         }
     });
@@ -170,7 +215,7 @@ let getHotel = function(city) {
                         let hotelName = data.results.items[i].title;
 
                     // send the data to the server using a POST request
-                    fetch('/hotels', {
+                    fetch('/hotel', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
