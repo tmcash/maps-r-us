@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { Hotel } = require('../../models');
+const { Food } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
         const { name, city } = req.body;
-        const hotel = await Hotel.create({ name, city });
-        res.status(201).json(hotel);
+        const food = await Food.create({ name, city });
+        res.status(201).json(food);
     } catch (error) {
-        console.error('Error saving hotel:', error);
+        console.error('Error saving food:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
