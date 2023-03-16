@@ -99,6 +99,8 @@ let getActivity = function(city) {
             activityElement.addEventListener('click', function(event) {
                 event.preventDefault();
                 let activityName = data.results.items[i].title;
+                let activityType = data.results.items[i].category.title;
+                let activityAddress = data.results.items[i].vicinity;
 
             // send the data to the server using a POST request
             fetch('/activity', {
@@ -108,6 +110,8 @@ let getActivity = function(city) {
                 },
                     body: JSON.stringify({
                         name: activityName,
+                        type: activityType,
+                        address: activityAddress,
                     })
                 }).then(response => {
                     console.log('Activity saved to server!');
@@ -156,6 +160,8 @@ let getFood = function(city) {
             foodElement.addEventListener('click', function(event) {
                 event.preventDefault();
                 let foodName = data.results.items[i].title;
+                let foodAddress = data.results.items[i].vicinity;
+                let foodHours = data.results.items[i].openingHours.text;
 
             // send the data to the server using a POST request
             fetch('/food', {
@@ -165,6 +171,8 @@ let getFood = function(city) {
                 },
                     body: JSON.stringify({
                         name: foodName,
+                        address: foodAddress,
+                        hours: foodHours,
                     })
                 }).then(response => {
                     console.log('Food saved to server!');
@@ -213,6 +221,8 @@ let getHotel = function(city) {
                     hotelElement.addEventListener('click', function(event) {
                         event.preventDefault();
                         let hotelName = data.results.items[i].title;
+                        let hotelType = data.results.items[i].category.title;
+                        let hotelAddress = data.results.items[i].vicinity;
 
                     // send the data to the server using a POST request
                     fetch('/hotel', {
@@ -222,6 +232,8 @@ let getHotel = function(city) {
                         },
                             body: JSON.stringify({
                                 name: hotelName,
+                                type: hotelType,
+                                address: hotelAddress,
                             })
                         }).then(response => {
                             console.log('Hotel saved to server!');
