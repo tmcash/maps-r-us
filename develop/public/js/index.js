@@ -9,10 +9,10 @@ let selectValue = document.querySelector("#city");
 let city = "";
 
 //code for date picker
-const startDateInput = document.getElementById("start-date-input");
-const endDateInput = document.getElementById("end-date-input");
-const startDate = startDateInput.value;
-const endDate = endDateInput.value;
+// const startDateInput = document.getElementById("start-date-input");
+// const endDateInput = document.getElementById("end-date-input");
+// const startDate = startDateInput.value;
+// const endDate = endDateInput.value;
 
 //setting up the cities and their lat/long
 cityLookup = {
