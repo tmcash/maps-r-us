@@ -1,4 +1,5 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
+
 const resultGridAll = document.getElementById("result-grid-all");
 const btnHotel = document.getElementById("btn-hotel");
 const btnFood = document.getElementById("btn-food");
