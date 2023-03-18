@@ -4,10 +4,21 @@ const City = require('./city');
 const Food = require('./food');
 const Hotel = require('./hotel');
 
-// Activity.belongsTo(City, {
-//     foreignKey: 'city_id',
-//   });
+User.belongsToMany(City, {
+  through: {
+    model: Activity,
+    unique: false
+  },
+  as: 'planned_trips'
+});
 
+City.belongsToMany(User, {
+  through: {
+    model: Activity,
+    unique: false
+  },
+  as: 'city_users'
+});
 
 
 

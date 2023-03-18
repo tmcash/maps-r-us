@@ -3,6 +3,9 @@ const sequelize = require('../config/connection');
 
 class Activity extends Model {}
 
+
+
+
 Activity.init(
 {
     id: {
@@ -25,7 +28,6 @@ Activity.init(
     city_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // field: 'city_id',
       references: {
         model: 'city',
         key: 'id',
