@@ -73,9 +73,10 @@ nav {
   align-items: flex-end;
   background-color: var(--light-teal);
   height: 50px; /* Set a fixed height for the nav element */
-  margin-left: 50px;
+  margin: 50px;
   border-radius: 5px;
-  padding-left: 20px;
+  padding: 20px;
+  font-weight: bold;
 }
 
 /* styling the login page */

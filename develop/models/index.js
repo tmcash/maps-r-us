@@ -4,9 +4,9 @@ const City = require('./city');
 const Food = require('./food');
 const Hotel = require('./hotel');
 
-Activity.belongsTo(City, {
-    foreignKey: 'city_id',
-  });
+// Activity.belongsTo(City, {
+//     foreignKey: 'city_id',
+//   });
 
 
 

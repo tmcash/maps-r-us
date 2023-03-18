@@ -25,9 +25,9 @@ Activity.init(
     city_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'city_id',
+      // field: 'city_id',
       references: {
-        model: 'City',
+        model: 'city',
         key: 'id',
         name: 'fk_activity_city'
       },

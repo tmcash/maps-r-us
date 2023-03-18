@@ -1,5 +1,12 @@
+const express = require('express');
 const router = require("express").Router();
 const { City, Activity, User } = require("../../models");
+
+//to work with handlebars
+router.get('/city', async (req, res) => {
+  const cityData = await City.findAll();
+  res.render('city', { cityData });
+});
 
 router.get("/", async (req, res) => {
   // includes its associated Products
