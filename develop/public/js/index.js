@@ -94,42 +94,43 @@ let getActivity = function(city) {
                     </ul>
                 </div>
             `;
-            // add an event listener to the activity-info element
-            // let activityElement = document.createElement('div');
-            // activityElement.innerHTML = foodInfo;
-            // activityElement.addEventListener('click', function(event) {
-            //     event.preventDefault();
-            //     let activityName = data.results.items[i].title;
-            //     let activityType = data.results.items[i].category.title;
-            //     let activityAddress = data.results.items[i].vicinity;
-
-            // send the data to the server using a POST request
-            // fetch('/activity', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //         body: JSON.stringify({
-            //             name: activityName,
-            //             type: activityType,
-            //             address: activityAddress,
-            //         })
-            //     }).then(response => {
-            //         console.log('Activity saved to server!');
-            //     }).catch(error => {
-            //         console.error('Error saving activity:', error);
-            //     });
-            // });
-
+            // add the activityInfo to the HTML
             resultGridAll.innerHTML += activityInfo;
-        }
-    });
-} else {
-    console.log('Error: ' + response.statusText);
-}
-});
-};
+          // add an event listener to the activity-info element
+          let activityElements = document.querySelectorAll('.activity-info');
+          activityElements.forEach((element) => {
+            element.addEventListener('click', function(event) {
+              event.preventDefault();
+              let index = element.getAttribute('data-index');
+              let activityName = data.results.items[index].title;
+              let activityType = data.results.items[index].category.title;
+              let activityAddress = data.results.items[index].vicinity;
 
+              // send the data to the server using a POST request
+              fetch('/activity', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: activityName,
+                  type: activityType,
+                  address: activityAddress,
+                })
+              }).then(response => {
+                console.log('Activity saved to server!');
+              }).catch(error => {
+                console.error('Error saving activity:', error);
+              });
+            });
+          });
+        }
+      });
+    } else {
+      console.log('Error: ' + response.statusText);
+    }
+  });
+};
 //Function to get restaurant locations in selected city
 let getFood = function(city) {
     let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?at=" + city + "&cat=restaurant&apiKey=" + APIKey;
