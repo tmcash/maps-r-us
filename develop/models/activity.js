@@ -24,6 +24,8 @@ Activity.init(
     },
     city_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'city_id',
       references: {
         model: 'city',
         key: 'id',
@@ -47,5 +49,7 @@ Activity.init(
     modelName: 'activity',
   }
 );
+
+
 
 module.exports = Activity;

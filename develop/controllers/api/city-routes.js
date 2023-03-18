@@ -1,61 +1,90 @@
-const router = require('express').Router();
-const { City } = require('../../models');
+const router = require("express").Router();
+const { City, Activity, User } = require("../../models");
 
+router.get("/", async (req, res) => {
+  // includes its associated Products
+  try {
+    const newCity = await City.findAll({
+      include: [
+        {
+          model: Activity,
+          attributes: ["id", "name", 'type', 'address'],
+        },
+        {
+            model: User,
+            attributes: ['id']
+        }
+      ],
+    });
+   res.json(newCity);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    // finds one category by its `id` value
     // includes its associated Products
     try{
-      const newCity = await City.findAll({
+        const newCity = await City.findOne({
+        where: {
+            id: req.params.id
+        },
+
         include: [
-          {
-            model: City,
-            attributes: ['id', 'name']
-          },
-        ],
-      });
-  
-      res.json(newCity);
-  
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+            {
+                model: Activity,
+                attributes: ["id", "name", 'type', 'address'],
+            },
+            {
+                model: User,
+                attributes: ['id']
+            }
+    ],
+        });
+        if (!newCity){
+        res.status(404).json({ message: 'No city found with this id'});
+        return;
+        }
+        res.json(newCity);
 
+        } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+        }
+        });
 
-router.post('/', async (req, res) => {
-
-try {
+router.post("/", async (req, res) => {
+  try {
     const newCity = await City.create({
-    ...req.body,
-    user_id: req.session.user_id,
+      ...req.body,
+      user_id: req.session.user_id
     });
 
     res.status(200).json(newCity);
-} catch (err) {
+  } catch (err) {
     res.status(400).json(err);
-}
+  }
 });
 
-router.delete('/:id', async (req, res) => {
-try {
-    const citytData = awaitCity.destroy({
-    where: {
-        id: req.params.id,
-        
-    },
+router.delete("/:id", async (req, res) => {
+  try {
+    const citytData = await City.destroy({
+      where: {
+        id: req.params.id
+      }
     });
 
     if (!citytData) {
-    res.status(404).json({ message: 'No city found with this id!' });
-    return;
-
+      res.status(404).json({ message: "No city found with this id!" });
+      return;
     }
 
     res.status(200).json(citytData);
-} catch (err) {
+  } catch (err) {
     res.status(500).json(err);
-}
+  }
 });
 
 module.exports = router;
