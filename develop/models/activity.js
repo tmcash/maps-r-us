@@ -27,7 +27,7 @@ Activity.init(
       allowNull: false,
       field: 'city_id',
       references: {
-        model: 'city',
+        model: 'City',
         key: 'id',
         name: 'fk_activity_city'
       },

@@ -4,14 +4,11 @@ const City = require('./city');
 const Food = require('./food');
 const Hotel = require('./hotel');
 
-Activity.hasOne(City, {
+Activity.belongsTo(City, {
     foreignKey: 'city_id',
   });
 
 
-User.hasMany(Activity, {
-    foreignKey: 'user_id'
-});
 
 
 module.exports = { User, Activity, City, Food, Hotel };

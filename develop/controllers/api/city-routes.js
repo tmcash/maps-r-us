@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: Activity,
-          attributes: ["id", "name", 'type', 'address'],
+          attributes: ["id", "name", 'type', 'address', 'city_id'],
         },
         {
             model: User,
