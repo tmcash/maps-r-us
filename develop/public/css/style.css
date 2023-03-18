@@ -160,22 +160,22 @@ nav {
 
 a:link {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 a:visited {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 a:hover {
-  text-decoration: underline;
-  color: var(--light-teal);
+  text-decoration: none;
+  color: var(--yellow-color);
 }
 
 a:active {
-  text-decoration: underline;
-  color: var(--light-teal);
+  text-decoration: none;
+  color: var(--yellow-color);
 }
 
 main {
