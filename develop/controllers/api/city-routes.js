@@ -1,6 +1,28 @@
 const router = require('express').Router();
 const { City } = require('../../models');
 
+
+router.get('/', async (req, res) => {
+    // includes its associated Products
+    try{
+      const newCity = await City.findAll({
+        include: [
+          {
+            model: City,
+            attributes: ['id', 'name']
+          },
+        ],
+      });
+  
+      res.json(newCity);
+  
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+
 router.post('/', async (req, res) => {
 
 try {
