@@ -53,8 +53,8 @@ let buttonClickHandler = function (event) {
     var clickedButton = event.target.getAttribute("id");
     console.log(clickedButton);
     console.log(city);
- 
-   if (clickedButton === "btn-activity") {
+
+  if (clickedButton === "btn-activity") {
         resultGridAll.innerHTML = '';
         getActivity(city);
     } 
