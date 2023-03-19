@@ -124,7 +124,7 @@ nav {
 }
 
 /* Adding style to the start date/ end date pickers */
-.start-date-picker{
+/* .start-date-picker{
   margin-top: 20px;
   padding-top: 20px;
   margin-bottom: 10px;
@@ -148,7 +148,7 @@ nav {
   margin-left: 20px;
   border-radius: 5px;
   color: black;
-}
+} */
 
 /* styling the drop down menu */
 
@@ -246,22 +246,26 @@ footer {
   padding: 3rem 0;
 }
 
+/* itinerary handlebars */
+.city-list {
+  color: white;
+}
 
-.hotel-info {
+/* .hotel-info {
   text-align: center;
   color: white;
   padding: 15px;
   margin: 10px;
   background-color: var(--transpLtTan);
-}
+} */
 
-.food-info {
+/* .food-info {
   text-align: center;
   color: white;
   padding: 15px;
   margin: 10px;
   background-color: var(--transpLtTan);
-}
+} */
 
 .activity-info {
   text-align: center;
@@ -336,7 +340,7 @@ footer {
     padding-top: 0;
   }
 
-  .food-info .activity-info .hotel-info {
+  .activity-info {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start;

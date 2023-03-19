@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Activity } = require('../../models');
 
+
+
 router.post('/', async (req, res) => {
     try {
         const { name, type, address } = req.body;
@@ -24,5 +26,9 @@ router.get('/city/:cityId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
+
+
 
 module.exports = router;

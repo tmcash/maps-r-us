@@ -40,9 +40,17 @@
     <div class="result-grid" id="result-grid-all">
       <!-- hotel/food/activity information here -->
       {{!-- {{#each results}}
-      {{if results.activityInfo}} //make partials
+      {{if results.activityInfo}}
       {{>activityInfo}}
       {{/each}} --}}
+    <div>
+      {{#each activities}}
+        <h2>{{name}}</h2>
+        <p>Type: {{type}}</p>
+        <p>Address: {{address}}</p>
+    <hr>
+  {{/each}}
+</div>
     </div>
   </div>
 </section>
