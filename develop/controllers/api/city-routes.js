@@ -1,66 +1,33 @@
-const express = require('express');
 const router = require("express").Router();
 const { City, Activity, User } = require("../../models");
 
 //to work with handlebars
-router.get('/city', async (req, res) => {
-  const cityData = await City.findAll();
-  res.render('city', { cityData });
+router.get('/', async (req, res) => {
+  try {
+    const cityData = await City.findAll();
+    res.render('city', { cityData });
+  } catch (err) {
+    res.status(500).json()
+}
 });
 
-router.get("/", async (req, res) => {
-  // includes its associated Products
+// GET a single location
+router.get("/:id", async (req, res) => {
   try {
-    const newCity = await City.findAll({
-      include: [
-        {
-          model: Activity,
-          attributes: ["id", "name", 'type', 'address', 'city_id'],
-        },
-        {
-            model: User,
-            attributes: ['id']
-        }
-      ],
+    const dbCityData = await City.findByPk(req.params.id,{
+      include: [{ model: User, through: Activity, as: 'city_users' }]
     });
-   res.json(newCity);
+    if (!dbCityData) {
+      res.status(404).json({ message: 'No location found with this id!' });
+      return;
+    }
+
+    res.status(200).json(dbCityData);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/:id', async (req, res) => {
-    // finds one category by its `id` value
-    // includes its associated Products
-    try{
-        const newCity = await City.findOne({
-        where: {
-            id: req.params.id
-        },
-
-        include: [
-            {
-                model: Activity,
-                attributes: ["id", "name", 'type', 'address'],
-            },
-            {
-                model: User,
-                attributes: ['id']
-            }
-    ],
-        });
-        if (!newCity){
-        res.status(404).json({ message: 'No city found with this id'});
-        return;
-        }
-        res.json(newCity);
-
-        } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-        }
-        });
 
 router.post("/", async (req, res) => {
   try {
