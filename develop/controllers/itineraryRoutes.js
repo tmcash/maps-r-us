@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   });
   // We use map() to iterate over cityData and then add .get({ plain: true }) each object to serialize it.
   const cities = cityData.map((city) => city.get({ plain: true }));
+  console.log(cities);
   // We render the template, 'all', passing in cities, a new array of serialized objects.
   res.render("itinerary", { cities });
 });

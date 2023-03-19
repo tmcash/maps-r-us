@@ -25,6 +25,9 @@ Activity.init(
     address: {
       type: DataTypes.STRING,
     },
+    to_do: {
+      type: DataTypes.BOOLEAN,
+    },
     city_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

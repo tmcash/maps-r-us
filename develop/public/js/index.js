@@ -63,7 +63,7 @@ let buttonClickHandler = function (event) {
 
 
 let getActivity = function(city) {
-    let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?&at=" + city + "&cat=sights-museums&apiKey=" + APIKey;
+    let queryURL = "https://places.ls.hereapi.com/places/v1/discover/explore?&at=" + city + "&cat=sights-museums&apiKey=" + APIKey;
 
     fetch(queryURL)
     .then(function(response) {
@@ -76,53 +76,50 @@ let getActivity = function(city) {
                 for(let i=0; i<10; i++){
                     console.log("Title: ", data.results.items[i].title);
                 
-				//adding details from API as text to HTML
-                let activityInfo = `
-                <div class = "activity-info">
-                    <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
-                    <ul class = "activity-misc-info">
-                        <li class = "title"><b>Name:</b> ${data.results.items[i].title}</li>
-                        <li class = "type"><b>Type:</b> ${data.results.items[i].category.title}</li>
-                        <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
-                    </ul>
-                </div>
-            `;
-            // add the activityInfo to the HTML
-            resultGridAll.innerHTML += activityInfo;
-          // add an event listener to the activity-info element
-          let activityElements = document.querySelectorAll('.activity-info');
-          activityElements.forEach((element) => {
-            element.addEventListener('click', function(event) {
-              event.preventDefault();
-              let index = element.getAttribute('data-index');
-              let activityName = data.results.items[index].title;
-              let activityType = data.results.items[index].category.title;
-              let activityAddress = data.results.items[index].vicinity;
-
-              // send the data to the server using a POST request
-              fetch('/activity', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  name: activityName,
-                  type: activityType,
-                  address: activityAddress,
-                })
-              }).then(response => {
-                console.log('Activity saved to server!');
-              }).catch(error => {
-                console.error('Error saving activity:', error);
-              });
+                    //adding details from API as text to HTML
+                    let activityInfo = `
+                        <div class="activity-info">
+                            <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
+                            <ul class="activity-misc-info">
+                                <li class="title"><b>Name:</b> ${data.results.items[i].title}</li>
+                                <li class="type"><b>Type:</b> ${data.results.items[i].category.title}</li>
+                                <li class="address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
+                                <button class="activity-btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg">Add to Activity List</button>
+                            </ul>
+                        </div>
+                    `;
+                    // add the activityInfo to the HTML
+                    resultGridAll.innerHTML += activityInfo;
+                    
+                    // add an event listener to the activity-btn element
+                    let activityBtn = document.querySelectorAll(".activity-btn")[i];
+                    activityBtn.addEventListener("click", function() {
+                        // get the activity data and save it to the database
+                        let activity = {
+                            name: data.results.items[i].title,
+                            type: data.results.items[i].category.title,
+                            address: data.results.items[i].vicinity,
+                            city: city,
+                            todo: true
+                        };
+                        // post the activity data to the server
+                        fetch("/activity", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(activity)
+                        })
+                        .then(response => response.json())
+                        .then(data => console.log(data))
+                        .catch(error => console.error(error));
+                    });
+                }
             });
-          });
+        } else {
+            console.log('Error: ' + response.statusText);
         }
-      });
-    } else {
-      console.log('Error: ' + response.statusText);
-    }
-  });
+    });
 };
 
 
