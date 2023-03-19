@@ -17,6 +17,10 @@ const cityData = [
     id: 4,
     name: 'New Orleans',
   },
+  {
+    id: 5,
+    name: 'New York City',
+  }
 ];
 
 const seedCity = () => City.bulkCreate(cityData);
