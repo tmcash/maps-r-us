@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+//Get route works in insomnia if you go to /api/activity/city/2
 router.get('/city/:cityId', async (req, res) => {
     try {
         const activities = await Activity.findAll({
