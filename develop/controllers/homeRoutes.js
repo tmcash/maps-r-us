@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
 router.get("/itinerary", async (req, res) => {
   try {
-    // const cityData = await City.findAll();
+
     const temp = true;
     if (temp) {
       res.render("itinerary", {

@@ -100,10 +100,10 @@ let getActivity = function(city) {
                             type: data.results.items[i].category.title,
                             address: data.results.items[i].vicinity,
                             city: city,
-                            todo: true
+                            to_do: true
                         };
                         // post the activity data to the server
-                        fetch("/activity", {
+                        fetch("../seeds/activityData.json", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
