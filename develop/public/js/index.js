@@ -1,8 +1,6 @@
 const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 
 const resultGridAll = document.getElementById("result-grid-all");
-const btnHotel = document.getElementById("btn-hotel");
-const btnFood = document.getElementById("btn-food");
 const btnActivity = document.getElementById("btn-activity");
 const buttonsEl = document.querySelector("search-section");
 
@@ -55,13 +53,8 @@ let buttonClickHandler = function (event) {
     var clickedButton = event.target.getAttribute("id");
     console.log(clickedButton);
     console.log(city);
-    if (clickedButton === "btn-hotel") {
-        resultGridAll.innerHTML = '';
-        getHotel(city);
-    } else if (clickedButton === "btn-food") {
-        resultGridAll.innerHTML = '';
-        getFood(city);
-    } else if (clickedButton === "btn-activity") {
+ 
+   if (clickedButton === "btn-activity") {
         resultGridAll.innerHTML = '';
         getActivity(city);
     } 
@@ -131,131 +124,10 @@ let getActivity = function(city) {
     }
   });
 };
-//Function to get restaurant locations in selected city
-let getFood = function(city) {
-    let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?at=" + city + "&cat=restaurant&apiKey=" + APIKey;
 
-    fetch(queryURL)
-    .then(function(response) {
-        if(response.ok) {
-            console.log("Food response", response);
-            response.json().then(function(data) {
-                console.log("Food data", data);
 
-                //setting loop to give back the top 10 places to eat
-                for(let i=0; i<10; i++){
 
-				//adding details from API as text to HTML
-                let foodInfo = `
-                <div class = "food-info">
-                    <img class="food-icon" src="${data.results.items[i].icon}" alt="food-icon"></img>
-                    <ul class = "food-misc-info">
-                        <li class = "title"><b>Restaurant Name:</b> ${data.results.items[i].title}</li>
-                        <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
-                        <li class = "hours"><b>Hours:</b> ${data.results.items[i].openingHours.text}</li>
-                    </ul>
-                </div>
-            `;
-            // add an event listener to the food-info element
-            // let foodElement = document.createElement('div');
-            // foodElement.innerHTML = foodInfo;
-            // foodElement.addEventListener('click', function(event) {
-            //     event.preventDefault();
-            //     let foodName = data.results.items[i].title;
-            //     let foodAddress = data.results.items[i].vicinity;
-            //     let foodHours = data.results.items[i].openingHours.text;
-
-            // send the data to the server using a POST request
-            // fetch('/food', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //         body: JSON.stringify({
-            //             name: foodName,
-            //             address: foodAddress,
-            //             hours: foodHours,
-            //         })
-            //     }).then(response => {
-            //         console.log('Food saved to server!');
-            //     }).catch(error => {
-            //         console.error('Error saving food:', error);
-            //     });
-            // });
-            resultGridAll.innerHTML += foodInfo;
-        }
-    });
-} else {
-    console.log('Error: ' + response.statusText);
-}
-});
-};
-
-//function to find the hotels in the selected city
-let getHotel = function(city) {
-    let queryURL ="https://places.ls.hereapi.com/places/v1/discover/explore?at=" + city + "&cat=accommodation&apiKey=" + APIKey;
-
-    fetch(queryURL)
-    .then(function(response) {
-        if(response.ok) {
-            console.log("Hotel response", response);
-            response.json().then(function(data) {
-                console.log("Hotel data", data);
-
-                //setting loop to give back the top 10 accomodations
-                for(let i=0; i<10; i++){
-
-				    //adding details from API as text to HTML
-                    let hotelInfo = `
-                    <div class = "hotel-info">
-                        <img class="hotel-icon" src="${data.results.items[i].icon}" alt="hotel-icon"></img>
-                        <ul class = "hotel-misc-info">
-                            <li class = "title"><b>Hotel Name:</b> ${data.results.items[i].title}</li>
-                            <li class = "type"><b>Type:</b> ${data.results.items[i].category.title}</li>
-                            <li class = "address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
-                        </ul>
-                    </div>
-                `;
-
-                // add an event listener to the hotel-info element
-                let hotelElement = document.createElement('div');
-                    hotelElement.innerHTML = hotelInfo;
-                    hotelElement.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        let hotelName = data.results.items[i].title;
-                        let hotelType = data.results.items[i].category.title;
-                        let hotelAddress = data.results.items[i].vicinity;
-
-                    // send the data to the server using a POST request
-                    fetch('/hotel', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                            body: JSON.stringify({
-                                name: hotelName,
-                                type: hotelType,
-                                address: hotelAddress,
-                            })
-                        }).then(response => {
-                            console.log('Hotel saved to server!');
-                        }).catch(error => {
-                            console.error('Error saving hotel:', error);
-                        });
-                    });
-
-                resultGridAll.innerHTML += hotelInfo;
-            }
-        });
-    } else {
-        console.log('Error: ' + response.statusText);
-    }
-    });
-    };
 
 //event listeners
 selectValue.addEventListener("change", buttonSelectHandler);
-// buttonsEl.addEventListener("click", buttonClickHandler);
-btnHotel.addEventListener("click", buttonClickHandler);
-btnFood.addEventListener("click", buttonClickHandler);
 btnActivity.addEventListener("click", buttonClickHandler);

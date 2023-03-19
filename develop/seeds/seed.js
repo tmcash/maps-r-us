@@ -3,9 +3,7 @@ const sequelize = require('../config/connection');
 
 // const userData = require('./userData.json');
 // const activityData = require('./activityData.json');
-// const foodData = require('./foodData.json');
 // const cityData = require('./cityData.json');
-// const hotelData = require('./hotelData.json');
 
 const seedUser = require('./userData');
 const seedCity = require('./cityData');
@@ -31,8 +29,6 @@ const seedDatabase = async () => {
   
   // const activities = await Activity.bulkCreate(activityData);
   // const cities = await City.bulkCreate(cityData);
-  // const foods = await Food.bulkCreate(foodData);
-  // const hotels = await Hotel.bulkCreate(hotelData);
 
 
   process.exit(0);

@@ -6,6 +6,6 @@ const itineraryRoutes = require('./itineraryRoutes');
 
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
-//router.use('/itinerary', itineraryRoutes);
+router.use('/itinerary', itineraryRoutes);
 
 module.exports = router;
