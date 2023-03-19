@@ -1,5 +1,8 @@
-<ul class="city-list">
-    {{#each cityData}}
-    <li>{{name}}</li>
+<div class="city-list">
+    {{#each cities as |city|}}
+        <p>
+            {{city.id}}
+            {{city.name}}
+        </p>
     {{/each}}
-</ul>
+</div>
