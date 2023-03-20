@@ -247,13 +247,28 @@ footer {
 }
 
 /* itinerary handlebars */
+.city-list h2 {
+  color: var(--light-teal);
+  border-bottom: solid;
+  border-color: var(--light-teal);
+  padding-bottom: 15px;
+}
+
+.city-list p{
+  color: var(--light-teal);
+}
+
+.city-list ul{
+  margin-left: 10px;
+}
+
 .city-list {
   color: white;
 }
 
 /* .hotel-info {
   text-align: center;
-  color: white;
+  color: white;43ew
   padding: 15px;
   margin: 10px;
   background-color: var(--transpLtTan);

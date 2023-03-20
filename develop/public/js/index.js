@@ -58,107 +58,157 @@ let buttonClickHandler = function (event) {
 
   if (clickedButton === "btn-activity") {
         resultGridAll.innerHTML = '';
-        getActivity(cityLatLong, cityId);
+        getActivity(city, cityLatLong, cityId);
     } 
 };
 
+let getActivity = function(city, cityLatLong, cityId) {
+    let queryURL =
+      "https://places.ls.hereapi.com/places/v1/discover/explore?&at=" +
+      cityLatLong +
+      "&cat=sights-museums&apiKey=" +
+      APIKey;
+  
+    fetch(queryURL).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          // clear the result grids before populating with new data
+          resultGridAll.innerHTML = "";
+  
+          // add event listener to result grid before generating activity cards
+          resultGridAll.addEventListener("click", function(event) {
+            if (event.target.classList.contains("activity-btn")) {
+              let index = Array.prototype.indexOf.call(
+                event.target.parentElement.parentElement.children,
+                event.target.parentElement
+              );
+              // get the activity data and save it to the database
+              let activity = {
+                name: data.results.items[index].title,
+                type: data.results.items[index].category.title,
+                address: data.results.items[index].vicinity,
+                city_id: cityId,
+                city: city
+              };
+              console.log("Sending activity data:", JSON.stringify(activity));
+              // post the activity data to the server
+              fetch("./api/activity", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(activity)
+              })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+            }
+          });
+  
+          //setting loop to give back the top 10 attractions
+          for (let i = 0; i < 10; i++) {
+            console.log("Title: ", data.results.items[i].title);
+  
+            //adding details from API as text to HTML
+            let activityInfo = `
+              <div class="activity-info">
+                  <img class="activity-icon" src="${
+                    data.results.items[i].icon
+                  }" alt="activity-icon"></img>
+                  <ul class="activity-misc-info">
+                      <li class="title"><b>Name:</b> ${
+                        data.results.items[i].title
+                      }</li>
+                      <li class="type"><b>Type:</b> ${
+                        data.results.items[i].category.title
+                      }</li>
+                      <li class="address"><b>Address:</b> ${
+                        data.results.items[i].vicinity
+                      }</li>
+                      <button class="btn activity-btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg">Add to Activity List</button>
+                  </ul>
+              </div>
+            `;
+            // add the activityInfo to the HTML
+            resultGridAll.innerHTML += activityInfo;
+          }
+        });
+      }
+    });
+  };
+  
 
 
-let getActivity = function(city, cityId) {
-    let queryURL = "https://places.ls.hereapi.com/places/v1/discover/explore?&at=" + city + "&cat=sights-museums&apiKey=" + APIKey;
 
-    fetch(queryURL)
-    .then(function(response) {
-        if(response.ok) {
-            console.log("Activity response", response);
-            response.json().then(function(data) {
-                console.log("Activity data", data);
 
-                //setting loop to give back the top 10 attractions
-                for(let i=0; i<10; i++){
-                    console.log("Title: ", data.results.items[i].title);
+// let getActivity = function(city, cityId) {
+//     let queryURL = "https://places.ls.hereapi.com/places/v1/discover/explore?&at=" + city + "&cat=sights-museums&apiKey=" + APIKey;
+
+//     fetch(queryURL)
+//     .then(function(response) {
+//         if(response.ok) {
+//             console.log("Activity response", response);
+//             response.json().then(function(data) {
+//                 console.log("Activity data", data);
+
+//                 //setting loop to give back the top 10 attractions
+//                 for(let i=0; i<10; i++){
+//                     console.log("Title: ", data.results.items[i].title);
       
                 
-                    //adding details from API as text to HTML
-                    let activityInfo = `
-                        <div class="activity-info">
-                            <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
-                            <ul class="activity-misc-info">
-                                <li class="title"><b>Name:</b> ${data.results.items[i].title}</li>
-                                <li class="type"><b>Type:</b> ${data.results.items[i].category.title}</li>
-                                <li class="address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
-                                <button class="btn activity-btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg">Add to Activity List</button>
-                            </ul>
-                        </div>
-                    `;
-                    // add the activityInfo to the HTML
-                    resultGridAll.innerHTML += activityInfo;
+//                     //adding details from API as text to HTML
+//                     let activityInfo = `
+//                         <div class="activity-info">
+//                             <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
+//                             <ul class="activity-misc-info">
+//                                 <li class="title"><b>Name:</b> ${data.results.items[i].title}</li>
+//                                 <li class="type"><b>Type:</b> ${data.results.items[i].category.title}</li>
+//                                 <li class="address"><b>Address:</b> ${data.results.items[i].vicinity}</li>
+//                                 <button class="btn activity-btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg">Add to Activity List</button>
+//                             </ul>
+//                         </div>
+//                     `;
+//                     // add the activityInfo to the HTML
+//                     resultGridAll.innerHTML += activityInfo;
 
-                    document.addEventListener("click", function(event) {
-                        if (event.target.classList.contains("activity-btn")) {
-                          let index = Array.prototype.indexOf.call(
-                            event.target.parentElement.parentElement.children,
-                            event.target.parentElement
-                          );
-                          // get the activity data and save it to the database
-                          let activity = {
-                            name: data.results.items[index].title,
-                            type: data.results.items[index].category.title,
-                            address: data.results.items[index].vicinity,
-                            city_id: cityId,
-                            to_do: true
-                          };
-                          console.log("Sending activity data:", JSON.stringify(activity));
-                          // post the activity data to the server
-                          fetch("./api/activity", {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(activity)
-                          })
-                            .then(response => response.json())
-                            .then(data => console.log(data))
-                            .catch(error => console.error(error));
+//                     document.addEventListener("click", function(event) {
+//                         if (event.target.classList.contains("activity-btn")) {
+//                           let index = Array.prototype.indexOf.call(
+//                             event.target.parentElement.parentElement.children,
+//                             event.target.parentElement
+//                           );
+//                           // get the activity data and save it to the database
+//                           let activity = {
+//                             name: data.results.items[index].title,
+//                             type: data.results.items[index].category.title,
+//                             address: data.results.items[index].vicinity,
+//                             city_id: cityId,
+//                             to_do: true
+//                           };
+//                           console.log("Sending activity data:", JSON.stringify(activity));
+//                           // post the activity data to the server
+//                           fetch("./api/activity", {
+//                             method: "POST",
+//                             headers: {
+//                               "Content-Type": "application/json"
+//                             },
+//                             body: JSON.stringify(activity)
+//                           })
+//                             .then(response => response.json())
+//                             .then(data => console.log(data))
+//                             .catch(error => console.error(error));
 
-                        }
-                      });
+//                         }
+//                       });
                       
 
-
-
-                    // add an event listener to the activity-btn element
-                    // let activityBtn = document.querySelectorAll(".activity-btn")[i];
-                    // activityBtn.addEventListener("click", function() {
-                    //     // get the activity data and save it to the database
-                    //     let activity = {
-                    //         name: data.results.items[i].title,
-                    //         type: data.results.items[i].category.title,
-                    //         address: data.results.items[i].vicinity,
-                    //         // city: city,
-                    //         to_do: true
-                    //     };
-                    //     console.log("Sending activity data:", JSON.stringify(activity));
-                    //     // post the activity data to the server
-                    //     fetch("./api/activity", {
-                    //         method: "POST",
-                    //         headers: {
-                    //             "Content-Type": "application/json"
-                    //         },
-                    //         body: JSON.stringify(activity)
-                            
-                    //     })
-                    //     .then(response => response.json())
-                    //     .then(data => console.log(data))
-                    //     .catch(error => console.error(error));
-                    // });
-                }
-            });
-        } else {
-            console.log('Error: ' + response.statusText);
-        }
-    });
-};
+//                 }
+//             });
+//         } else {
+//             console.log('Error: ' + response.statusText);
+//         }
+//     });
+// };
 
 
 
