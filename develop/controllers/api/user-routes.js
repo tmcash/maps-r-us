@@ -4,12 +4,14 @@ const withAuth = require('../../utils/auth');
 
 // CREATE new user
 router.post('/signup', async (req, res) => {
+    console.log("cats", req.body.username, req.body.email, req.body.password)
     try {
       const newUser = await User.create({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
       });
+      console.log("This doesn't work", newUser)
   
       req.session.save(() => {
         req.session.userId = newUser.id;
@@ -20,6 +22,7 @@ router.post('/signup', async (req, res) => {
         res.json(newUser);
       });
     } catch (err) {
+        console.log("err", err)
       res.status(500).json(err);
     }
   });
@@ -64,7 +67,7 @@ router.post('/login', (req, res) => {
         }
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
+            req.session.email = dbUserData.email;
             req.session.loggedIn = true;
       
             res.json({ user: dbUserData, message: 'You are now logged in!' });
