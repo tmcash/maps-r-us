@@ -5,9 +5,10 @@ const { Activity } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
-        const { name, type, address } = req.body;
-        const activity = await Activity.create({ name, type, address });
-        res.status(201).json(activity);
+        // const { name, type, address, to_do, } = req.body;
+        // const activity = await Activity.create({ name, type, address, to_do });
+        const activityData = await Activity.create(req.body);
+        res.status(201).json(activityData);
     } catch (error) {
         console.error('Error saving activity:', error);
         res.status(500).json({ message: 'Internal server error' });

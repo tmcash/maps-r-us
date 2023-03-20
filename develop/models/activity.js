@@ -34,7 +34,7 @@ Activity.init(
       references: {
         model: 'city',
         key: 'id',
-        name: 'fk_activity_city'
+        name: 'city'
       },
     },
     user_id: {
@@ -43,7 +43,7 @@ Activity.init(
       references: {
         model: 'User',
         key: 'id',
-        name: 'fk_activity_user'
+        name: 'user'
       }
     },
   },
