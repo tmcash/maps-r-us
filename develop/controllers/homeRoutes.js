@@ -2,39 +2,26 @@ const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
 
-    const temp = true;
-    if (temp) {
-      res.render("search", {
-        logged_in: req.session.logged_in
-      });
-      return;
-    }
-    res.redirect("/login");
+    const userData = await User.findAll({
+      // attributes: { exclude: ["password"] },
+      // order: [["name", "ASC"]]
+    });
+
+    const users = userData.map((project) => project.get({ plain: true }));
+    res.render("search", {
+      users,
+      logged_in: req.session.logged_in
+    });
+    // return;
+
+    // res.redirect("/login");
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-// router.get("/itinerary", async (req, res) => {
-//   try {
-
-//     const temp = true;
-//     if (temp) {
-//       res.render("itinerary", {
-//         logged_in: req.session.logged_in
-//       });
-//       return;
-//     }
-//     res.redirect("/login");
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-
 
 router.get("/email", async (req, res) => {
   try {
