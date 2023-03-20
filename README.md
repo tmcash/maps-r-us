@@ -31,42 +31,12 @@ THEN they are able to choose itineraries that were previously saved to view the 
 - MySql - Sequelize
 - Handlebars
 
-## TODO
-
-### HTML
-- add all the code
-
-### CSS
-- need responsive website
-- use a framework?
-
-### Javascript
-- yes
-
-### Express
-- make apis
-- do POST/GET/DELETE/CREATE/UPDATE things
-- maybe do route stuff here too
-
-### MySql - Sequelize
-- add database
-- link primary keys
-- make seeds
-- make routes
-- make controllers
-
-### Handlebars
-- mvc folders
-- do log in authentication
-- set cookies
-
-
 ## WireFrame
 ![MapsRUs](./develop/assets/images/wireframe.jpg)   
 
 ## Visual Representation
+![Alt text](develop/assets/image.png)
 
 ## Links
 
-Deployed Site
-Repo
+- [Repo](https://github.com/tmcash/maps-r-us)
