@@ -18,24 +18,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/itinerary", async (req, res) => {
-  try {
-
-    const temp = true;
-    if (temp) {
-      res.render("itinerary", {
-        logged_in: req.session.logged_in
-      });
-      return;
-    }
-    res.redirect("/login");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-
-
 router.get("/email", async (req, res) => {
   try {
     // const userData = await User.findAll({

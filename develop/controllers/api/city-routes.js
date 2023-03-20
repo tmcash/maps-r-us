@@ -30,6 +30,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// GET a single location
+router.get("/byName/:name", async (req, res) => {
+  try {
+    const dbCityData = await City.findOne({ where: { name: req.params.name }});
+    if (!dbCityData) {
+      res.status(404).json({ message: 'No location found with this name!' });
+      return;
+    }
+
+    res.status(200).json(dbCityData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 router.post("/", async (req, res) => {
   try {

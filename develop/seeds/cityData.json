@@ -1,23 +1,34 @@
 [
     {
-      "id": 1,
-      "name": "Charleston"
+        "name": "Charleston"
     },
     {
-      "id": 2,
-      "name": "Santa Fe"
+        "name": "Santa Fe"
     },
     {
-      "id": 3,
-      "name": "Savannah"
+        "name": "Savannah"
     },
     {
-      "id": 4,
-      "name": "New Orleans"
+        "name": "New Orleans"
     },
     {
-      "id": 5,
-      "name": "New York City"
+        "name": "NYC"
+    },
+    {
+        "name": "San Antonio"
+    },
+    {
+        "name": "Chicago"
+    },
+    {
+        "name": "Portland"
+    },
+    {
+        "name": "Williamsburg"
+    },
+    {
+        "name": "Honolulu"
     }
-  ]
-  
+]
+
+

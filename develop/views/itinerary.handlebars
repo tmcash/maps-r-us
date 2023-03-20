@@ -1,9 +1,12 @@
 <div class="city-list">
-    {{#each cities as |city|}}
+    <h2>City Names & Activities</h2>
+
+    {{#each activities as |activity|}}
         <p>
-            <h1>City Names</h1>
-            {{city.id}}
-            {{city.name}}
+            {{activity.city}}
+                <ul>
+                    <li>{{activity.name}}</li>
+                </ul>
         </p>
     {{/each}}
 </div>
