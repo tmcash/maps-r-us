@@ -9,10 +9,15 @@ const SeedCityData = require('./cityData.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
+  await User.bulkCreate(SeedUserData, {
+    individualHooks: true,
+    returning: true,
+  });
+
   // await seedUser();
   // await seedCity();
 
-  const userSeed = await User.bulkCreate(SeedUserData);
+  // const userSeed = await User.bulkCreate(SeedUserData);
   const citySeed = await City.bulkCreate(SeedCityData);
   const activitySeed = await Activity.bulkCreate(SeedActivityData);
 
