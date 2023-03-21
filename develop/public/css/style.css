@@ -256,10 +256,15 @@ footer {
 
 .city-list p{
   color: var(--light-teal);
+  margin-top: 10px;
 }
 
 .city-list ul{
   margin-left: 10px;
+  border-bottom: solid;
+  border-width: 2px;
+  border-color: var(--yellow-color);
+
 }
 
 .city-list {
