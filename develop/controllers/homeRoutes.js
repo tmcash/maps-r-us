@@ -18,24 +18,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/email", async (req, res) => {
-  try {
-    // const userData = await User.findAll({
-    // // attributes: { exclude: ['password'] },
-    // // order: [['name', 'ASC']],
-    // });
-
-    // const users = userData.map((project) => project.get({ plain: true }));
-    if (req.session.logged_in) {
-      res.render("email", {
-        logged_in: req.session.logged_in
-      });
-    }
-    res.redirect("/login");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {

@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 
 
 router.post('/send-email', (req, res) => {
-  const { name, type, address } = req.body;
+  const { city, name, type, address } = req.body;
 
   const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -17,8 +17,11 @@ router.post('/send-email', (req, res) => {
 const mailOptions = {
   from: 'mapsrus6@gmail.com',
   to: req.body.email,
-  subject: "Your Travel Itinerary",
-  text: `${name} (${type}) at ${address}`
+  subject: `Your Travel Itinerary for ${city}`,
+  text: `Here are your travel plans when you visit ${city}! \n
+        Activity Type: ${type}\n
+        ${name} \n
+        Address: ${address}`
 };
 
 

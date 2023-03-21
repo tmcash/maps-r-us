@@ -79,6 +79,8 @@ let getActivity = function(city, cityLatLong, cityId) {
           // add event listener to result grid before generating activity cards
           resultGridAll.addEventListener("click", function(event) {
             if (event.target.classList.contains("activity-btn")) {
+              console.log("event.target: ",event.target);
+              console.log("data.results: ", data.results);
               let index = Array.prototype.indexOf.call(
                 event.target.parentElement.parentElement.children,
                 event.target.parentElement
@@ -113,10 +115,8 @@ let getActivity = function(city, cityLatLong, cityId) {
             //adding details from API as text to HTML
             let activityInfo = `
               <div class="activity-info">
-                  <img class="activity-icon" src="${
-                    data.results.items[i].icon
-                  }" alt="activity-icon"></img>
-                  <ul class="activity-misc-info">
+                  <img class="activity-icon" src="${data.results.items[i].icon}" alt="activity-icon"></img>
+                  <ul class="activity-misc-info"> 
                       <li class="title"><b>Name:</b> ${
                         data.results.items[i].title
                       }</li>
@@ -143,6 +143,7 @@ $(document).on('click', '.send-email-btn', function(event) {
   event.preventDefault();
   const email = $('#email').val(); // get the email input value
   const data = {
+      city: $(this).siblings('input[name=city]').val(),
       name: $(this).siblings('input[name=name]').val(),
       type: $(this).siblings('input[name=type]').val(),
       address: $(this).siblings('input[name=address]').val(),
