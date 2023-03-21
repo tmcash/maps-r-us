@@ -264,11 +264,16 @@ footer {
   border-bottom: solid;
   border-width: 2px;
   border-color: var(--yellow-color);
-
 }
 
 .city-list {
   color: white;
+}
+
+/* Styling the email submit form */
+#send-email-form {
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
 /* .hotel-info {

@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
         req.session.email = newUser.email;
         req.session.loggedIn = true;
   
-        res.json(newUser);
+        res.json({ newUser, email: newUser.email });
       });
     } catch (err) {
         console.log("err", err)

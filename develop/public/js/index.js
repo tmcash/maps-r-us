@@ -3,6 +3,7 @@ const APIKey = "5P33fDg7Tt7vuEz6sL29Bd9KETzuqvLDV8oaUS5NIIM";
 const resultGridAll = document.getElementById("result-grid-all");
 const btnActivity = document.getElementById("btn-activity");
 const buttonsEl = document.querySelector("search-section");
+const sendEmailBtn = document.querySelector(".send-email-btn");
 
 let selectValue = document.querySelector("#city");
 let city = "";
@@ -137,6 +138,33 @@ let getActivity = function(city, cityLatLong, cityId) {
     });
   };
   
+//creating event listener for the email button to send an email
+$(document).on('click', '.send-email-btn', function(event) {
+  event.preventDefault();
+  const email = $('#email').val(); // get the email input value
+  const data = {
+      name: $(this).siblings('input[name=name]').val(),
+      type: $(this).siblings('input[name=type]').val(),
+      address: $(this).siblings('input[name=address]').val(),
+      email: email // add email to the data object
+  };
+  $.ajax({
+      url: '/email/send-email',
+      type: 'POST',
+      data: data,
+      success: function(result) {
+        console.log(result);
+        window.open('/email/success', '_blank');
+        alert('Email sent successfully!');
+
+      },
+      error: function(err) {
+          console.log(err);
+          alert('Error sending email!');
+      }
+  });
+  return false;
+});
 
 
 

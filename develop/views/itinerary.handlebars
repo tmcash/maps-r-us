@@ -1,5 +1,5 @@
 <div class="city-list">
-    <h2>City Names & Activities</h2>
+    <h2>Itinerary: City Names & Activities</h2>
 
     {{#each activities as |activity|}}
         <p>
@@ -9,6 +9,14 @@
                     <li>{{activity.type}}</li>
                     <li>{{{activity.address}}}</li>
                 </ul>
+                <form id="send-email-form" action="/email/send-email" method="post">
+                    <input type="hidden" name="name" value="{{activity.name}}">
+                    <input type="hidden" name="type" value="{{activity.type}}">
+                    <input type="hidden" name="address" value="{{activity.address}}">
+                    <label for="email">Enter your email:</label>
+                    <input type="email" name="email" id="email" required>
+                    <button type="submit" class="btn bg-teal-800 hover:bg-teal-400 hover:font-bold text-white text-lg send-email-btn">Send Itinerary</button>
+                </form>
         </p>
     {{/each}}
 </div>
