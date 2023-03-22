@@ -5,10 +5,9 @@ const withAuth = require("../utils/auth").default;
 router.get("/", async (req, res) => {
   try {
 
-    const temp = true;
-    if (temp) {
+    if (req.session.loggedIn) {
       res.render("search", {
-        logged_in: req.session.logged_in
+        loggedIn: req.session.loggedIn
       });
       return;
     }
@@ -20,7 +19,7 @@ router.get("/", async (req, res) => {
 
 
 router.get("/login", (req, res) => {
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -29,7 +28,7 @@ router.get("/login", (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
       req.session.destroy(() => {
         res.status(204).end();
       });

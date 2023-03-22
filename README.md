@@ -32,10 +32,10 @@ THEN they are able to choose itineraries that were previously saved to view the 
 - Handlebars
 
 ## WireFrame
-![MapsRUs](./develop/assets/images/wireframe.jpg)   
+![MapsRUs](./assets/images/wireframe.jpg)   
 
 ## Visual Representation
-![Alt text](develop/assets/image.png)
+![Alt text](/assets/image.png)
 
 ## Links
 
