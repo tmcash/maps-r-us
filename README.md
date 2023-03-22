@@ -1,5 +1,10 @@
 # MapsR-US - A Travel Guide and Journal App
 
+## Links
+
+- [Repo](https://github.com/tmcash/maps-r-us)
+- [Heroku App](https://guarded-reef-93768.herokuapp.com)
+
 ## Collaborators
 - [Erin Sawyer](https://github.com/erinsawyer504)
 - [Tyler Cash](https://github.com/tmcash)
@@ -37,6 +42,3 @@ THEN they are able to choose itineraries that were previously saved to view the 
 ## Visual Representation
 ![Alt text](/assets/image.png)
 
-## Links
-
-- [Repo](https://github.com/tmcash/maps-r-us)
