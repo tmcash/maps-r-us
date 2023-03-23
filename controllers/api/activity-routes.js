@@ -7,6 +7,7 @@ router.post('/', async (req, res) => {
     try {
         // const { name, type, address, to_do, } = req.body;
         // const activity = await Activity.create({ name, type, address, to_do });
+       console.log(req.body);
         const activityData = await Activity.create(req.body);
         res.status(201).json(activityData);
     } catch (error) {
