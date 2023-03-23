@@ -94,7 +94,7 @@ let getActivity = async function(city, cityLatLong, cityId) {
       console.log("index", index);
       console.log("Sending activity data:", JSON.stringify(activity));
       // post the activity data to the server
-      fetch("./api/activity", {
+      fetch("/api/activity", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
